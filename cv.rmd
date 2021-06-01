@@ -1,0 +1,127 @@
+---
+title: "Emil Malta's CV"
+author: Emil Malta
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: true
+output:
+  pagedown::html_resume:
+    css: ['dd_cv.css', 'resume']
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(magrittr) # For the pipe
+source("cv_printing_functions.r")
+
+# Read in all data and initialize a CV printer object
+CV <- create_CV_object(
+  data_location = "https://docs.google.com/spreadsheets/d/1yurMjDRly4vgXue8GJKc0FlQW00lPbIalm4p7K_srrY/edit?usp=sharing",  
+  pdf_mode = params$pdf_mode
+)
+
+```
+
+
+```{r}
+# When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
+if(params$pdf_mode) {
+    cat("
+<style>
+:root{
+  --decorator-outer-offset-left: -6.5px;
+}
+</style>")
+}
+```
+
+
+Aside
+================================================================================
+
+```{r}
+# Build interactive network of positions colored by section
+# and connected if they occurred in the same year
+datadrivencv::build_network_logo(CV$entries_data)
+```
+
+```{r}
+if(params$pdf_mode){
+  cat("")
+} else {
+  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf)")
+}
+```
+
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_contact_info()
+```
+
+Programming {#skills}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_skill_bars()
+```
+
+Languages {#languages}
+--------------------------------------------------------------------------------
+
+Danish (Native Speaker) <br>
+English (Strong)<br>
+Greenlandic (Native Speaker)
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Made with the R package [**pagedown**](https://github.com/rstudio/pagedown). 
+
+The source code is available on [github.com/emilmalta/cv](https://github.com/emilmalta/cv).
+
+Last updated on `r Sys.Date()`.
+
+Main
+================================================================================
+
+Emil Malta {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+# Note the special double pipe so we modify the CV object in place
+CV %<>% print_text_block("intro") 
+```
+
+```{r}
+CV %<>% print_text_block("teaching") 
+```
+
+Experience {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_section("experience")
+```
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('education')
+```
+
+Teaching {data-icon=hands-helping}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_section("teaching")
+```
