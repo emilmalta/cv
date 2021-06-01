@@ -55,7 +55,7 @@ datadrivencv::build_network_logo(CV$entries_data)
 if(params$pdf_mode){
   cat("")
 } else {
-  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/nstrayer/cv/raw/master/strayer_cv.pdf)")
+  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/emilmalta/cv/raw/main/cv.pdf)")
 }
 ```
 
