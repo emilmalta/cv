@@ -45,10 +45,14 @@ if(params$pdf_mode) {
 Aside
 ================================================================================
 
+![Profilbillede](IMG_2804.jpg)
+
 ```{r}
-# Build interactive network of positions colored by section
-# and connected if they occurred in the same year
-datadrivencv::build_network_logo(CV$entries_data)
+if(params$pdf_mode){
+  cat("")
+} else {
+  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/emilmalta/cv/raw/main/cv.pdf)")
+}
 ```
 
 ```{r}
@@ -63,15 +67,9 @@ if(params$pdf_mode){
 Contact {#contact}
 --------------------------------------------------------------------------------
 
+
 ```{r}
 CV %>% print_contact_info()
-```
-
-Programming {#skills}
---------------------------------------------------------------------------------
-
-```{r}
-CV %>% print_skill_bars()
 ```
 
 Languages {#languages}
@@ -81,28 +79,22 @@ Danish (Native Speaker) <br>
 English (Strong)<br>
 Greenlandic (Native Speaker)
 
-Disclaimer {#disclaimer}
+Programming {#skills}
 --------------------------------------------------------------------------------
 
-Made with the R package [**pagedown**](https://github.com/rstudio/pagedown). 
-
-The source code is available on [github.com/emilmalta/cv](https://github.com/emilmalta/cv).
-
-Last updated on `r Sys.Date()`.
+```{r}
+CV %>% print_skill_bars()
+```
 
 Main
 ================================================================================
 
-Emil Malta {#title}
+Emil Nikki Malta {#title}
 --------------------------------------------------------------------------------
 
 ```{r}
 # Note the special double pipe so we modify the CV object in place
 CV %<>% print_text_block("intro") 
-```
-
-```{r}
-CV %<>% print_text_block("teaching") 
 ```
 
 Experience {data-icon=laptop}
@@ -119,9 +111,49 @@ Education {data-icon=graduation-cap data-concise=true}
 CV %<>% print_section('education')
 ```
 
-Teaching {data-icon=hands-helping}
---------------------------------------------------------------------------------
 
-```{r}
-CV %>% print_section("teaching")
-```
+
+
+
+</div>
+
+<br>
+
+::: {#title}
+::: {.section .level1}
+
+<h1>Key Skills</h1>
+
+**Statistical programming**
+SAS (Advanced), R (expert), SQL (near expert), Python (intermediate).
+
+**Statistical modeling**
+Regression models (logistic, ridge, LASSO etc.), Survival Analysis, Classification trees, Bootstrapping, PCA, Clustering, SVMs, etc.
+
+**Data Management**
+Large-scale databases, national statistics, healthcare registers.
+
+**Data Visualisation**
+ggplot2 (expert), Tableau (expert), Plotly (intermediate), Seaborn (intermediate)
+
+**Domain knowledge**
+Genetic epidemiology, sustainability in healthcare, bioinformatics.
+
+
+<h1>
+
+Personal
+
+</h1>
+
+Part of my free time is spent playing guitar and piano. I run 4 times a week, and am currently training for a
+half-marathon.
+
+You will know me as an extrovert colleague, who values good relations. Very good at sharing knowledge and experience. Good at managing own
+tasks.
+
+I am 35 years old, living in Mørke on Djursland. Born and raised in
+Greenland. Married to Astrid Helena, with whom I have 2 kids. On paternity leave at the time of writing, until end of January.
+
+:::
+:::
